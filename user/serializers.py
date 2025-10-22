@@ -3,17 +3,24 @@ from rest_framework import serializers
 
 
 class UserSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(
+        write_only=True,
+        required=True,
+        validators=[],
+        min_length=5
+    )
+
     class Meta:
         model = get_user_model()
-        fields = ("id", "username", "email", "password", "is_staff")
-        read_only_fields = ("id", "is_staff")
-        extra_kwargs = {"password": {"write_only": True, "min_length": 5}}
+        fields = ("id", "username", "password", "email", "first_name", "last_name")
+        read_only_fields = ("id",)
 
     def create(self, validated_data):
-        return get_user_model().objects.create_user(**validated_data)
+        user = get_user_model().objects.create_user(**validated_data)
+        return user
 
     def update(self, instance, validated_data):
-        password = validated_data.pop("password", None)
+        password = validated_data.pop('password', None)
         user = super().update(instance, validated_data)
 
         if password:
@@ -21,3 +28,8 @@ class UserSerializer(serializers.ModelSerializer):
             user.save()
 
         return user
+
+    def validate_password(self, value):
+        if len(value) < 5:
+            raise serializers.ValidationError("Password must be at least 5 characters long.")
+        return value
