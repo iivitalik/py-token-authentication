@@ -44,7 +44,6 @@ class MovieViewSet(viewsets.ModelViewSet):
     queryset = Movie.objects.prefetch_related("genres", "actors")
     serializer_class = MovieSerializer
     permission_classes = [IsAdminOrIfAuthenticatedReadOnly]
-    http_method_names = ["get", "post"]
 
     @staticmethod
     def _params_to_ints(qs):
