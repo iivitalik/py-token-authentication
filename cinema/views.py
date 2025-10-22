@@ -131,7 +131,7 @@ class OrderViewSet(viewsets.ModelViewSet):
     serializer_class = OrderSerializer
     pagination_class = OrderPagination
     permission_classes = (IsAdminOrOwner,)
-    
+
     def get_queryset(self):
         user = self.request.user
         if user.is_staff:
