@@ -10,9 +10,6 @@ class IsAdminOrIfAuthenticatedReadOnly(permissions.BasePermission):
     """
 
     def has_permission(self, request, view):
-        # Allow POST for unauthenticated users (user registration)
-        if request.method == "POST":
-            return True
 
         # Allow read-only for authenticated users
         if (request.method in permissions.SAFE_METHODS
