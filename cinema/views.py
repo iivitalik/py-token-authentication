@@ -124,7 +124,6 @@ class OrderPagination(PageNumberPagination):
     max_page_size = 100
 
 
-
 class OrderViewSet(mixins.ListModelMixin,
                    mixins.CreateModelMixin,
                    viewsets.GenericViewSet):
