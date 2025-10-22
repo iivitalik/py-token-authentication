@@ -2,13 +2,6 @@ from rest_framework import permissions
 
 
 class IsAdminOrIfAuthenticatedReadOnly(permissions.BasePermission):
-    """
-    Custom permission to allow:
-    - Read-only for authenticated users
-    - Full access for admin users
-    - Allow POST (create) for unauthenticated users (user registration)
-    """
-
     def has_permission(self, request, view):
 
         # Allow read-only for authenticated users
