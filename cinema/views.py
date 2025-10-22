@@ -1,7 +1,6 @@
 from datetime import datetime
 
 from django.db.models import F, Count
-from rest_framework import viewsets
 from rest_framework.pagination import PageNumberPagination
 
 from cinema.models import Genre, Actor, CinemaHall, Movie, MovieSession, Order
@@ -24,6 +23,7 @@ from cinema.serializers import (
 
 from rest_framework import viewsets, mixins
 
+
 class GenreViewSet(
     mixins.CreateModelMixin,
     mixins.ListModelMixin,
@@ -33,6 +33,7 @@ class GenreViewSet(
     serializer_class = GenreSerializer
     permission_classes = (IsAdminOrIfAuthenticatedReadOnly,)
 
+
 class ActorViewSet(
     mixins.CreateModelMixin,
     mixins.ListModelMixin,
@@ -41,6 +42,7 @@ class ActorViewSet(
     queryset = Actor.objects.all()
     serializer_class = ActorSerializer
     permission_classes = (IsAdminOrIfAuthenticatedReadOnly,)
+
 
 class CinemaHallViewSet(
     mixins.CreateModelMixin,
